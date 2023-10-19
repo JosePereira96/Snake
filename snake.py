@@ -2,6 +2,7 @@ import random
 import math
 import pygame
 
+#window size
 width = 1300
 height = 700
 
@@ -44,19 +45,29 @@ def eatFood():
         penultimate = snake[len(snake)-2]
         
         if penultimate[0] == last[0]:
+            #snake is moving up/down
             
             x = last[0]
             
             if penultimate[1] > last[1]:
+                #snake is moving down
+                #create food up (smaller y value) from last element
                 newLast = pygame.Rect(last[0],last[1]-step,step,step)
             else:
+                #snake is moving up
+                #create food down from last element
                 newLast = pygame.Rect(last[0],last[1]+step,step,step)
                 
         elif penultimate[1] == last[1]:
+            #snake is moving sideways
             y = last[1]
             if penultimate[0] > last[0]:
+                #snake is moving right
+                #create food left of last element
                 newLast = pygame.Rect(last[0]-step,last[1],step,step)
             else:
+                #snake is moving left
+                #create food right of last element
                 newLast = pygame.Rect(last[0]+step,last[1],step,step)
     else:
         if snake_direction == [0,1]:
@@ -124,7 +135,6 @@ def youLost():
     elif keys[pygame.K_n]:
         running = False
 
-#Example file showing a circle moving on screen
 
 
 # pygame setup
@@ -214,9 +224,9 @@ while running:
     if keys[pygame.K_d] and snake_direction != [-1,0]:
         snake_direction = pygame.Vector2(1,0)
     
-    for i in range(1,len(snake)):
-        if snake_head.colliderect(snake[i]):
-            youLost()
+    #for i in range(1,len(snake)):
+        #if snake_head.colliderect(snake[i]):
+            #youLost()
 
             
     #update snake position WITH RECT
